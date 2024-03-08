@@ -1,0 +1,24 @@
+/*
+ * project2.c
+ *
+ *  Created on: 17 Sep 2023
+ *      Author: maria
+ */
+#include<avr/io.h>
+#include<avr/interrupt.h>
+#include <util/delay.h>
+/*
+ * Ftimer=Fcpu/N=1MG/1024=977HZ
+ * Ttimer=1/Ftimer=1ms
+ * Tcmpare=cmp_val*Ttimer=1000*1ms=1sec ->CMP_val=1000
+ */
+
+void Timer1_CTC_Init(void){
+	TCNT1=24;//start counting from
+	OCR1A=1000;//set the compare value
+	TIMSK |=(1<<OCIE1A);//enable module interrupt with the CTC mood
+	TCCR1B =(1<<WGM12)|(1<<CS12)|(1<<CS10);//set the timer to CTC mood and the N=1024
+}
+int main (){
+
+}
